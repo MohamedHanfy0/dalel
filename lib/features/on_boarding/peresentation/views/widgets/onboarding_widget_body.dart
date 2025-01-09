@@ -4,15 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
 
 class OnboardinWidgetBody extends StatelessWidget {
-  OnboardinWidgetBody({super.key});
-  final PageController _controller = PageController();
+  final PageController controller;
+  final Function(int) onChanged;
+  const OnboardinWidgetBody({super.key, required this.controller, required this.onChanged});
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 500,
       child: PageView.builder(
-        controller: _controller,
+        controller: controller,
         itemCount: onboarding.length,
+        onPageChanged: onChanged,
         itemBuilder: (context, index) {
           return Column(
             children: [
@@ -29,13 +32,13 @@ class OnboardinWidgetBody extends StatelessWidget {
               SizedBox(
                 height: 24,
               ),
-              smoothPageIndicator(controller: _controller),
+              smoothPageIndicator(controller: controller),
               SizedBox(
                 height: 32,
               ),
               Text(
                 textAlign: TextAlign.center,
-                "Explore The history with \n Dalel in a smart way",
+                onboarding[index].title,
                 style: AppTextStyles.poppins500style24,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -45,7 +48,7 @@ class OnboardinWidgetBody extends StatelessWidget {
               ),
               Text(
                 textAlign: TextAlign.center,
-                "Using our app’s history libraries \n you can find many historical periods ",
+                onboarding[index].subTitle,
                 style: AppTextStyles.poppins500style16,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
