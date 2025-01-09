@@ -1,9 +1,9 @@
-
 import 'package:dalel/core/function/custom_navigate.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
 import 'package:dalel/core/utils/strings.dart';
 import 'package:dalel/core/widgets/custom_bottom.dart';
 import 'package:dalel/features/on_boarding/database/model.dart';
+import 'package:dalel/features/on_boarding/peresentation/views/functions/on_boarding.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -11,7 +11,7 @@ class GetButton extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
   final currentIndex;
   PageController pageController;
-   GetButton({super.key, this.currentIndex,required this.pageController});
+  GetButton({super.key, this.currentIndex, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +21,7 @@ class GetButton extends StatelessWidget {
           CustomBottom(
               text: AppStrings.createAccount,
               onPressed: () {
+                onBoardingVisited();
                 CustomNavigate(context, '/SignUp');
               }),
           SizedBox(
@@ -28,6 +29,7 @@ class GetButton extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
+              onBoardingVisited();
               CustomNavigate(context, '/logIn');
             },
             child: Text(
@@ -48,4 +50,3 @@ class GetButton extends StatelessWidget {
     }
   }
 }
-

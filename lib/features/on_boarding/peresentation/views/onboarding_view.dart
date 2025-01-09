@@ -1,8 +1,5 @@
 import 'package:dalel/core/function/custom_navigate.dart';
-import 'package:dalel/core/utils/app_text_styles.dart';
-import 'package:dalel/core/utils/strings.dart';
-import 'package:dalel/core/widgets/custom_bottom.dart';
-import 'package:dalel/features/on_boarding/database/model.dart';
+import 'package:dalel/features/on_boarding/peresentation/views/functions/on_boarding.dart';
 import 'package:dalel/features/on_boarding/peresentation/views/widgets/custom_nav_bar.dart';
 import 'package:dalel/features/on_boarding/peresentation/views/widgets/get_button.dart';
 import 'package:dalel/features/on_boarding/peresentation/views/widgets/onboarding_widget_body.dart';
@@ -31,6 +28,7 @@ class _OnboardingViewState extends State<OnboardingView> {
             ),
             custom_nav_bar(
               onTap: () {
+                onBoardingVisited();
                 CustomNavigate(context, '/SignUp');
               },
             ),
@@ -45,7 +43,10 @@ class _OnboardingViewState extends State<OnboardingView> {
             SizedBox(
               height: 88,
             ),
-            GetButton(pageController: _pageController,currentIndex: currentIndex,), 
+            GetButton(
+              pageController: _pageController,
+              currentIndex: currentIndex,
+            ),
             SizedBox(
               height: 17,
             )
