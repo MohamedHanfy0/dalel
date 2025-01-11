@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomBottom extends StatelessWidget {
-  CustomBottom({super.key, required this.text, this.bottomColor, required this.onPressed});
+  CustomBottom({super.key, required this.text, this.bottomColor,  this.onPressed});
   String text;
   Color? bottomColor;
-  VoidCallback onPressed;
+  VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return SizedBox(

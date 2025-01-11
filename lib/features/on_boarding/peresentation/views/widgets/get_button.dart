@@ -22,7 +22,7 @@ class GetButton extends StatelessWidget {
               text: AppStrings.createAccount,
               onPressed: () {
                 onBoardingVisited();
-                CustomNavigate(context, '/SignUp');
+                customReplacementNavigate(context, '/SignUp');
               }),
           SizedBox(
             height: 16,
@@ -30,7 +30,7 @@ class GetButton extends StatelessWidget {
           GestureDetector(
             onTap: () {
               onBoardingVisited();
-              CustomNavigate(context, '/logIn');
+              customReplacementNavigate(context, '/logIn');
             },
             child: Text(
               AppStrings.loginNow,

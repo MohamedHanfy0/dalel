@@ -15,12 +15,12 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    bool isOnBoardingVisited = getIt<CasheHelper>().getData(key: 'onBoardingVisited') ?? false;
+    bool isOnBoardingVisited =
+        getIt<CasheHelper>().getData(key: 'onBoardingVisited') ?? false;
     if (isOnBoardingVisited) {
-          delayedNavigate(context, '/SignUp');
+      delayedNavigate(context, '/SignUp');
     } else {
-          
-          delayedNavigate(context, '/onBorading');
+      delayedNavigate(context, '/onBorading');
     }
 
     super.initState();
@@ -43,7 +43,7 @@ void delayedNavigate(context, String path) {
   Future.delayed(
     Duration(seconds: 2),
     () {
-      CustomNavigate(context, path);
+      customReplacementNavigate(context, path);
     },
   );
 }

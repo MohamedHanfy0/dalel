@@ -1,12 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:dalel/core/function/custom_navigate.dart';
-import 'package:dalel/core/widgets/custom_bottom.dart';
-import 'package:dalel/features/auth/presentation/views/widgets/alrady_an_account_sign_in.dart';
-import 'package:dalel/features/auth/presentation/views/widgets/custom_check_box.dart';
-import 'package:dalel/features/auth/presentation/views/widgets/custom_terms.dart';
+import 'package:dalel/features/auth/presentation/views/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+
+import 'package:dalel/core/function/custom_navigate.dart';
 import 'package:dalel/core/utils/strings.dart';
-import 'package:dalel/features/auth/presentation/views/widgets/custom_text_field.dart';
+import 'package:dalel/features/auth/presentation/views/widgets/alrady_an_account_sign_in.dart';
 import 'package:dalel/features/auth/presentation/views/widgets/welcome_text.dart';
 
 class SignUpView extends StatefulWidget {
@@ -27,63 +25,26 @@ class _SignUpViewState extends State<SignUpView> {
           slivers: [
             SliverToBoxAdapter(
               child: Container(
-                margin: EdgeInsets.only(top: 152, bottom: 48),
+                margin: EdgeInsets.only(top: 140, bottom: 48),
                 alignment: Alignment.center,
                 child: WelcomText(text: AppStrings.welcome),
               ),
             ),
             SliverToBoxAdapter(
-              child: Column(
-                spacing: 24,
-                children: [
-                  CustomTextField(
-                    labelText: AppStrings.firstName,
-                  ),
-                  CustomTextField(
-                    labelText: AppStrings.lastName,
-                  ),
-                  CustomTextField(
-                    labelText: AppStrings.emailAddress,
-                  ),
-                  CustomTextField(
-                    labelText: AppStrings.password,
-                  ),
-                ],
-              ),
+              child: CustomTextFormField(),
             ),
             SliverToBoxAdapter(
-              child: Row(
-                children: [
-                  CustomCheckBox(
-                    isCheck: isCheckBox,
-                    onChanged: (value) {
-                      setState(() {
-                        isCheckBox = value!;
-                      });
-                    },
-                  ),
-                  customTerms()
-                ],
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: alreadyHaveAnAccountSignIn(
+                  onTap: () {
+                    customNavigate(context, '/logIn');
+                  },
+                  alreadyHaveAnAccount: AppStrings.alreadyHaveAnAccount,
+                  signIn: AppStrings.signIn,
+                ),
               ),
             ),
-            SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 88,
-                  ),
-                  CustomBottom(text: AppStrings.signUp, onPressed: () {}),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  alreadyHaveAnAccountSignIn(
-                    onTap: () {
-                      CustomNavigate(context, '/logIn');
-                    },
-                  )
-                ],
-              ),
-            )
           ],
         ),
       ),

@@ -29,7 +29,7 @@ class _OnboardingViewState extends State<OnboardingView> {
             custom_nav_bar(
               onTap: () {
                 onBoardingVisited();
-                CustomNavigate(context, '/SignUp');
+                customReplacementNavigate(context, '/SignUp');
               },
             ),
             OnboardinWidgetBody(
