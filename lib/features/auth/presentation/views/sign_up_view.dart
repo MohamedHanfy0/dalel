@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dalel/core/function/custom_navigate.dart';
-import 'package:dalel/core/utils/app_text_styles.dart';
 import 'package:dalel/core/widgets/custom_bottom.dart';
 import 'package:dalel/features/auth/presentation/views/widgets/alrady_an_account_sign_in.dart';
 import 'package:dalel/features/auth/presentation/views/widgets/custom_check_box.dart';
