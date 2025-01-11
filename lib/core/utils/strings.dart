@@ -11,10 +11,13 @@ abstract class AppStrings {
       lastName = 'Last Name',
       emailAddress = 'Email Address',
       password = 'Password',
-      iHaveAgreeToourTermsAndCondition =
-          'I have agree to our Terms and Condition',
+      iHaveAgreeToour =
+          'I have agree to our',
+      termsAndCondition =
+          'Terms and Condition',
       signUp = 'Sign Up',
       alreadyHaveAnAccount = 'Already have an account ?',
+      signIn = 'Sign In',
       welcomeBack = 'Welcome Back !',
       forgotPassword = 'Forgot Password ?',
       // home screen
