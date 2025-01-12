@@ -19,6 +19,14 @@ class HomeView extends StatelessWidget {
               icon: Icon(Icons.logout))
         ],
       ),
+      body: Center(
+        child: ElevatedButton(
+            onPressed: () {
+              final pr = FirebaseAuth.instance.currentUser!.emailVerified;
+              print(pr);
+            },
+            child: Text('print')),
+      ),
     );
   }
 }

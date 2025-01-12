@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,8 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final auth = FirebaseAuth.instance;
+  // final CollectionReference users =
+  //     FirebaseFirestore.instance.collection('users');
   late String firstName;
   late String lastName;
   late String emailAddress;
@@ -18,12 +21,15 @@ class AuthCubit extends Cubit<AuthState> {
   signUpWithEmailAndPassword() async {
     try {
       emit(SignupLoadingState());
+      // ignore: unused_local_variable
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailAddress,
         password: password,
       );
-      veriFiyAccount();
+      await addUser();
+      await veriFiyAccount();
+
       emit(SignupSuccessState());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -59,6 +65,25 @@ class AuthCubit extends Cubit<AuthState> {
 
   veriFiyAccount() async {
     await auth.currentUser!.sendEmailVerification();
+  }
+
+  addUser() async {
+    try {
+      CollectionReference collectionReference =
+          FirebaseFirestore.instance.collection('users');
+      await collectionReference.add({
+        'emailAddress': emailAddress,
+        'firstName': firstName,
+        'lastName': lastName,
+      });
+    } catch (e) {
+      // delteAccount();
+    }
+  }
+
+  delteAccount() async {
+    print("=ddddddddddddddddddddddddddddddddddd");
+    await FirebaseAuth.instance.currentUser!.delete();
   }
 
   forgotPassword() async {
