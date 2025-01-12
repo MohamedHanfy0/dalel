@@ -9,7 +9,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("HOme page"),
+        title: Text("Home page"),
         actions: [
           IconButton(
               onPressed: () {
@@ -18,14 +18,6 @@ class HomeView extends StatelessWidget {
               },
               icon: Icon(Icons.logout))
         ],
-      ),
-      body: Center(
-        child: ElevatedButton(
-            onPressed: () {
-              final pr = FirebaseAuth.instance.currentUser!.emailVerified;
-              print(pr);
-            },
-            child: Text('print')),
       ),
     );
   }

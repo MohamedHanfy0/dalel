@@ -73,11 +73,11 @@ class ForgotPasswordView extends StatelessWidget {
                                 : CustomBottom(
                                     bottomColor: AppColors.primaryColor,
                                     text: AppStrings.sendVerificationCode,
-                                    onPressed: () {
+                                    onPressed: () async {
                                       if (authCubit
                                           .forgotPassFormState.currentState!
                                           .validate()) {
-                                        authCubit.forgotPassword();
+                                      await  authCubit.forgotPassword();
                                       }
                                     },
                                   ),

@@ -76,9 +76,9 @@ class _CustomLogInFormState extends State<CustomLogInForm> {
                   : CustomBottom(
                       bottomColor: AppColors.primaryColor,
                       text: AppStrings.signUp,
-                      onPressed: () {
-                        if (authCubit.logInFormState.currentState!.validate()) {
-                          authCubit.signInWithEmailAndPassword();
+                      onPressed: ()async {
+                        if (authCubit.logInFormState.currentState!.validate())  {
+                         await authCubit.signInWithEmailAndPassword();
                         }
                       }),
             ],

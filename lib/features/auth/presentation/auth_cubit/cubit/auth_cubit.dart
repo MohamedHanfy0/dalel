@@ -18,7 +18,7 @@ class AuthCubit extends Cubit<AuthState> {
   bool termsAndConditionCheckBoxValue = false;
   AuthCubit() : super(AuthInitial());
 
-  signUpWithEmailAndPassword() async {
+  Future<void> signUpWithEmailAndPassword() async {
     try {
       emit(SignupLoadingState());
       // ignore: unused_local_variable
@@ -32,20 +32,13 @@ class AuthCubit extends Cubit<AuthState> {
 
       emit(SignupSuccessState());
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        emit(SignupFailerState(meassage: 'The password provided is too weak.'));
-      } else if (e.code == 'email-already-in-use') {
-        emit(SignupFailerState(
-            meassage: 'The account already exists for that email.'));
-      } else {
-        emit(SignupFailerState(meassage: "Check Email and Password!"));
-      }
+      singUpExcepation(e);
     } catch (e) {
       emit(SignupFailerState(meassage: e.toString()));
     }
   }
 
-  signInWithEmailAndPassword() async {
+  Future<void> signInWithEmailAndPassword() async {
     try {
       emit(SingInLoadingState());
       final credential = await FirebaseAuth.instance
@@ -63,11 +56,11 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  veriFiyAccount() async {
+  Future<void> veriFiyAccount() async {
     await auth.currentUser!.sendEmailVerification();
   }
 
-  addUser() async {
+  Future<void> addUser() async {
     try {
       CollectionReference collectionReference =
           FirebaseFirestore.instance.collection('users');
@@ -81,12 +74,11 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  delteAccount() async {
-    print("=ddddddddddddddddddddddddddddddddddd");
+  Future<void> delteAccount() async {
     await FirebaseAuth.instance.currentUser!.delete();
   }
 
-  forgotPassword() async {
+  Future<void> forgotPassword() async {
     try {
       emit(ForgotPassLoadingState());
       await auth.sendPasswordResetEmail(email: emailAddress);
@@ -96,8 +88,19 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  updateConditionCheckBoxValue({required newValue}) {
+  void updateConditionCheckBoxValue({required newValue}) {
     termsAndConditionCheckBoxValue = newValue;
     emit(CheckBoxValueState());
+  }
+
+  void singUpExcepation(FirebaseAuthException e) {
+    if (e.code == 'weak-password') {
+      emit(SignupFailerState(meassage: 'The password provided is too weak.'));
+    } else if (e.code == 'email-already-in-use') {
+      emit(SignupFailerState(
+          meassage: 'The account already exists for that email.'));
+    } else {
+      emit(SignupFailerState(meassage: "Check Email and Password!"));
+    }
   }
 }

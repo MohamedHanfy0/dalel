@@ -93,11 +93,11 @@ class _CustomSignUpFormState extends State<CustomSignUpForm> {
                               ? AppColors.grey
                               : AppColors.primaryColor,
                       text: AppStrings.signUp,
-                      onPressed: () {
+                      onPressed: () async {
                         if (authCubit.termsAndConditionCheckBoxValue == true) {
                           if (authCubit.singUpFormState.currentState!
                               .validate()) {
-                            authCubit.signUpWithEmailAndPassword();
+                           await authCubit.signUpWithEmailAndPassword();
                           }
                         }
                       }),
