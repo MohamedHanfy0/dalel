@@ -1,113 +1,63 @@
-import 'package:dalel/core/function/custom_navigate.dart';
-import 'package:dalel/core/utils/app_colors.dart';
-import 'package:dalel/core/utils/strings.dart';
-import 'package:dalel/core/widgets/custom_bottom.dart';
-import 'package:dalel/features/auth/presentation/auth_cubit/cubit/auth_cubit.dart';
-import 'package:dalel/features/auth/presentation/views/widgets/custom_check_box.dart';
-import 'package:dalel/features/auth/presentation/views/widgets/custom_terms.dart';
-import 'package:dalel/features/auth/presentation/views/widgets/custom_text_field.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:flutter/material.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dalel/core/utils/app_text_styles.dart';
 
-class CustomTextFormField extends StatefulWidget {
-  const CustomTextFormField({
-    super.key,
-  });
+// ignore: must_be_immutable
+class CustomTextFormField extends StatelessWidget {
+  final Function(String)? onChanged;
+  final String labelText;
+  VoidCallback? clickVisibilty;
+  bool? isVisibilty;
 
-  @override
-  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
-}
+  CustomTextFormField(
+      {super.key,
+      required this.onChanged,
+      required this.labelText,
+      this.clickVisibilty,
+      this.isVisibilty});
 
-class _CustomTextFormFieldState extends State<CustomTextFormField> {
-  bool isVisibility = true;
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {
-        if (state is SignupSuccessState) {
-          
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: AppColors.deepBrown,
-              content: Text("Created Account Successfuly.")));
-              customReplacementNavigate(context, '/logIn');
-        } else if (state is SignupFailerState) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: AppColors.deepBrown,
-              content: Text(state.meassage.toString())));
-        }
-      },
-      builder: (context, state) {
-        AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
-        return Form(
-          key: authCubit.formState,
-          child: Column(
-            spacing: 24,
-            children: [
-              CustomTextField(
-                labelText: AppStrings.firstName,
-                onChanged: (firstName) {
-                  //  BlocProvider<AuthCubit>(create: (context) => ,)
-                  authCubit.firstName = firstName;
-                },
-              ),
-              CustomTextField(
-                labelText: AppStrings.lastName,
-                onChanged: (lastName) {
-                  authCubit.lastName = lastName;
-                },
-              ),
-              CustomTextField(
-                labelText: AppStrings.emailAddress,
-                onChanged: (email) {
-                  authCubit.emailAddress = email;
-                },
-              ),
-              CustomTextField(
-                isVisibilty: isVisibility,
-                clickVisibilty: () {
-                  setState(() {
-                    isVisibility = !isVisibility;
-                  });
-                },
-                labelText: AppStrings.password,
-                onChanged: (password) {
-                  authCubit.password = password;
-                },
-              ),
-              Row(
-                children: [
-                  CustomCheckBox(),
-                  customTerms(),
-                ],
-              ),
-              SizedBox(
-                height: 55,
-              ),
-              state is SignupLoadingState
-                  ? CircularProgressIndicator(
-                      color: AppColors.deepBrown,
-                    )
-                  : CustomBottom(
-                      bottomColor:
-                          authCubit.termsAndConditionCheckBoxValue == false
-                              ? AppColors.grey
-                              : AppColors.deepBrown,
-                      text: AppStrings.signUp,
-                      onPressed: () {
-                        if (authCubit.termsAndConditionCheckBoxValue == true) {
-                          if (authCubit.formState.currentState!.validate()) {
-                            authCubit.signUpWithEmailAndPassword();
-                          }
-                        }
-                      }),
-              SizedBox(
-                height: 16,
-              ),
-            ],
-          ),
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: TextFormField(
+        onChanged: onChanged,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "This is field required";
+          } else {
+            return null;
+          }
+        },
+        style: AppTextStyles.poppins400style14,
+        obscureText: isVisibilty == false ? true : false,
+        decoration: InputDecoration(
+          suffixIcon: clickVisibilty == null
+              ? null
+              : IconButton(
+                  onPressed: clickVisibilty,
+                  icon: Icon(
+                    isVisibilty == true
+                        ? Icons.visibility_outlined
+                        : Icons.visibility_off_outlined,
+                    color: Color(0xff999999),
+                  )),
+          label: Text(labelText),
+          labelStyle: AppTextStyles.poppins500style16
+              .copyWith(color: Color(0xff6F6460), fontSize: 12),
+          border: outlineInputBorder(),
+          enabledBorder: outlineInputBorder(),
+          focusedBorder: outlineInputBorder(),
+        ),
+      ),
     );
   }
+}
+
+OutlineInputBorder outlineInputBorder() {
+  return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(4),
+      borderSide: BorderSide(width: 1, color: Color(0xff0F0D23)));
 }

@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:dalel/features/auth/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:dalel/features/auth/presentation/views/widgets/custom_sign_up_form.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dalel/core/function/custom_navigate.dart';
@@ -31,7 +31,7 @@ class _SignUpViewState extends State<SignUpView> {
               ),
             ),
             SliverToBoxAdapter(
-              child: CustomTextFormField(),
+              child: CustomSignUpForm(),
             ),
             SliverToBoxAdapter(
               child: Padding(

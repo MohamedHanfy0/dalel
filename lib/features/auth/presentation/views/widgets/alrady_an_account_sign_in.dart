@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:dalel/core/utils/app_text_styles.dart';
-import 'package:dalel/core/utils/strings.dart';
 
 class alreadyHaveAnAccountSignIn extends StatelessWidget {
   VoidCallback onTap;

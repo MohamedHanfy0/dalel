@@ -12,5 +12,12 @@ final class SignupFailerState extends AuthState {
 }
 
 
+final class SingInLoadingState extends AuthState {}
+final class SignInSuccessState extends AuthState {}
+final class SignInFailerState extends AuthState {
+  SignInFailerState({required this.meassage});
+  String meassage;
+}
+
+
 final class CheckBoxValueState extends AuthState {}
-// final class CheckBoxValueState extends AuthState {}
