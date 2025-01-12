@@ -3,9 +3,9 @@ import 'package:dalel/core/utils/app_colors.dart';
 import 'package:dalel/core/utils/strings.dart';
 import 'package:dalel/core/widgets/custom_bottom.dart';
 import 'package:dalel/features/auth/presentation/auth_cubit/cubit/auth_cubit.dart';
-import 'package:dalel/features/auth/presentation/views/widgets/custom_check_box.dart';
-import 'package:dalel/features/auth/presentation/views/widgets/custom_terms.dart';
-import 'package:dalel/features/auth/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:dalel/features/auth/presentation/widgets/custom_check_box.dart';
+import 'package:dalel/features/auth/presentation/widgets/custom_terms.dart';
+import 'package:dalel/features/auth/presentation/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -91,7 +91,7 @@ class _CustomSignUpFormState extends State<CustomSignUpForm> {
                       bottomColor:
                           authCubit.termsAndConditionCheckBoxValue == false
                               ? AppColors.grey
-                              : AppColors.deepBrown,
+                              : AppColors.primaryColor,
                       text: AppStrings.signUp,
                       onPressed: () {
                         if (authCubit.termsAndConditionCheckBoxValue == true) {

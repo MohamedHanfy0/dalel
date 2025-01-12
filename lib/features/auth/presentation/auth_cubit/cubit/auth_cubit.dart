@@ -4,12 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
+  final auth = FirebaseAuth.instance;
   late String firstName;
   late String lastName;
   late String emailAddress;
   late String password;
   GlobalKey<FormState> singUpFormState = GlobalKey();
   GlobalKey<FormState> logInFormState = GlobalKey();
+  GlobalKey<FormState> forgotPassFormState = GlobalKey();
   bool termsAndConditionCheckBoxValue = false;
   AuthCubit() : super(AuthInitial());
 
@@ -56,7 +58,17 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   veriFiyAccount() async {
-    await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+    await auth.currentUser!.sendEmailVerification();
+  }
+
+  forgotPassword() async {
+    try {
+      emit(ForgotPassLoadingState());
+      await auth.sendPasswordResetEmail(email: emailAddress);
+      emit(ForgotPassSuccessState());
+    } catch (e) {
+      emit(ForgotPassFailerState(meassage: e.toString()));
+    }
   }
 
   updateConditionCheckBoxValue({required newValue}) {

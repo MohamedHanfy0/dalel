@@ -75,5 +75,6 @@ abstract class AppStrings {
       verifyAccount = 'Verify Account',
       haventReceivedVerificationCode = 'Haven’t received verification code?',
       resendCode = 'Resend Code',
+      enterYourRegisterEmailBelowReceivePasswordReset = 'Enter your registered email below to receive password reset instruction',
       verificationow = 'Verification Now';
 }

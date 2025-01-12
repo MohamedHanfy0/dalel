@@ -20,4 +20,13 @@ final class SignInFailerState extends AuthState {
 }
 
 
+
+final class ForgotPassLoadingState extends AuthState {}
+final class ForgotPassSuccessState extends AuthState {}
+final class ForgotPassFailerState extends AuthState {
+  ForgotPassFailerState({required this.meassage});
+  String meassage;
+}
+
+
 final class CheckBoxValueState extends AuthState {}

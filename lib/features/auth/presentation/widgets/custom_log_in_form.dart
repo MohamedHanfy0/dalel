@@ -3,8 +3,8 @@ import 'package:dalel/core/utils/app_colors.dart';
 import 'package:dalel/core/utils/strings.dart';
 import 'package:dalel/core/widgets/custom_bottom.dart';
 import 'package:dalel/features/auth/presentation/auth_cubit/cubit/auth_cubit.dart';
-import 'package:dalel/features/auth/presentation/views/widgets/custom_text_form_field.dart';
-import 'package:dalel/features/auth/presentation/views/widgets/text_forgot_password.dart';
+import 'package:dalel/features/auth/presentation/widgets/custom_text_form_field.dart';
+import 'package:dalel/features/auth/presentation/widgets/text_forgot_password.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,13 +65,16 @@ class _CustomLogInFormState extends State<CustomLogInForm> {
                   margin: EdgeInsets.only(top: 16, bottom: 105),
                   alignment: Alignment.centerRight,
                   child: TextForgotPassword(
-                      onTap: () {}, text: AppStrings.forgotPassword)),
+                      onTap: () {
+                        customNavigate(context, '/forgotPassword');
+                      },
+                      text: AppStrings.forgotPassword)),
               state is SingInLoadingState
                   ? CircularProgressIndicator(
                       color: AppColors.deepBrown,
                     )
                   : CustomBottom(
-                      bottomColor: AppColors.deepBrown,
+                      bottomColor: AppColors.primaryColor,
                       text: AppStrings.signUp,
                       onPressed: () {
                         if (authCubit.logInFormState.currentState!.validate()) {

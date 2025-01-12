@@ -1,12 +1,11 @@
-import 'package:dalel/core/utils/app_colors.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomBottom extends StatelessWidget {
-  CustomBottom({super.key, required this.text, this.bottomColor,  this.onPressed});
+  CustomBottom({super.key, required this.text,required this.bottomColor,  this.onPressed});
   String text;
-  Color? bottomColor;
+  Color bottomColor;
   VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class CustomBottom extends StatelessWidget {
       height: 56,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: bottomColor ?? AppColors.primaryColor,
+          backgroundColor: bottomColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),

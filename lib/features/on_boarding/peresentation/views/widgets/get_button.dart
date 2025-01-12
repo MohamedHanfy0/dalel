@@ -1,4 +1,5 @@
 import 'package:dalel/core/function/custom_navigate.dart';
+import 'package:dalel/core/utils/app_colors.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
 import 'package:dalel/core/utils/strings.dart';
 import 'package:dalel/core/widgets/custom_bottom.dart';
@@ -19,11 +20,13 @@ class GetButton extends StatelessWidget {
       return Column(
         children: [
           CustomBottom(
-              text: AppStrings.createAccount,
-              onPressed: () {
-                onBoardingVisited();
-                customReplacementNavigate(context, '/SignUp');
-              }),
+            text: AppStrings.createAccount,
+            onPressed: () {
+              onBoardingVisited();
+              customReplacementNavigate(context, '/SignUp');
+            },
+            bottomColor: AppColors.primaryColor,
+          ),
           SizedBox(
             height: 16,
           ),
@@ -46,6 +49,7 @@ class GetButton extends StatelessWidget {
           pageController.nextPage(
               duration: Duration(microseconds: 200), curve: Curves.bounceIn);
         },
+        bottomColor: AppColors.primaryColor,
       );
     }
   }
